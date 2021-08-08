@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -55,6 +56,10 @@ public class CompanyService {
      */
     public Company getCompanyEvent(@NotNull String id) {
         return companyRepository.findById(id).get();
+    }
+
+    public List<Company> getAllEventsByCompany(@NotNull String id){
+        return companyRepository.findAllByCompanyId(id);
     }
 
 }

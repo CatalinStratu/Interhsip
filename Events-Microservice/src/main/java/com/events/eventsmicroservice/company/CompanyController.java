@@ -6,6 +6,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/companies")
 public class CompanyController {
@@ -30,6 +32,11 @@ public class CompanyController {
     @GetMapping(path = "/{id}")
     public ResponseEntity<Company> getCompanyEvent(@PathVariable String id) {
         return ResponseEntity.ok(companyService.getCompanyEvent(id));
+    }
+
+    @GetMapping(path = "events/{companyId}")
+    public ResponseEntity<List<Company>> getAllEventsByCompany(@PathVariable String companyId){
+        return ResponseEntity.ok(companyService.getAllEventsByCompany(companyId));
     }
 
 }
