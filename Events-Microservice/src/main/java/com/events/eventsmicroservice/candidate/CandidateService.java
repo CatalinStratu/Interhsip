@@ -1,6 +1,5 @@
 package com.events.eventsmicroservice.candidate;
 
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,22 +36,20 @@ public class CandidateService {
     /**
      * Update candidate Event
      *
-     * @param id candidate event ID
+     * @param id        candidate event ID
      * @param candidate The candidate model
      * @return Details of the candidate event
      */
     public HttpStatus updateCandidateEvent(@NotNull String id, @NotNull Candidate candidate) {
         Optional<Candidate> candidateData = candidateRepository.findById(id);
 
-        if(candidateData.isPresent()){
-            Candidate toBeUpdate =  candidateData.get();
+        return candidateData.map(result -> {
+            Candidate toBeUpdate = candidateData.get();
             toBeUpdate.setCandidateId(candidate.getCandidateId());
             toBeUpdate.setMessage(candidate.getMessage());
             candidateRepository.save(toBeUpdate);
             return HttpStatus.OK;
-        } else {
-            return HttpStatus.NOT_FOUND;
-        }
+        }).orElse(HttpStatus.NOT_FOUND);
     }
 
     /**
@@ -64,7 +61,7 @@ public class CandidateService {
     public CandidateDTO getCandidateEvent(@NotNull String id) {
         return candidateRepository
                 .findById(id)
-                .map(result -> modelMapper.map(result,CandidateDTO.class))
+                .map(result -> modelMapper.map(result, CandidateDTO.class))
                 .orElseThrow(EntityNotFoundException::new);
     }
 
@@ -74,11 +71,11 @@ public class CandidateService {
      * @param id The candidate model
      * @return Details of the candidate event
      */
-    public List<CandidateDTO> getAllEventsByCandidate(@NotNull String id){
+    public List<CandidateDTO> getAllEventsByCandidate(@NotNull String id) {
         return candidateRepository
                 .findAllByCandidateId(id)
                 .stream()
-                .map(result -> modelMapper.map(result,CandidateDTO.class))
+                .map(result -> modelMapper.map(result, CandidateDTO.class))
                 .collect(Collectors.toList());
     }
 }
