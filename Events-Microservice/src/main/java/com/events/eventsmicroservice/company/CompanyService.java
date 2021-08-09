@@ -3,19 +3,25 @@ package com.events.eventsmicroservice.company;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.modelmapper.ModelMapper;
+import javax.persistence.EntityNotFoundException;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CompanyService {
 
     private final CompanyRepository companyRepository;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public CompanyService(final CompanyRepository companyRepository) {
+    public CompanyService(CompanyRepository companyRepository, ModelMapper modelMapper) {
+
         this.companyRepository = companyRepository;
+        this.modelMapper = modelMapper;
     }
 
     /**
@@ -49,17 +55,30 @@ public class CompanyService {
     }
 
     /**
-     * Add company Event
+     * Return company event
      *
      * @param id The company model
      * @return Details of the company event
      */
-    public Company getCompanyEvent(@NotNull String id) {
-        return companyRepository.findById(id).get();
+    public CompanyDTO getCompanyEvent(@NotNull String id) {
+        return companyRepository
+                .findById(id)
+                .map(result -> modelMapper.map(result,CompanyDTO.class))
+                .orElseThrow(EntityNotFoundException::new);
     }
 
-    public List<Company> getAllEventsByCompany(@NotNull String id){
-        return companyRepository.findAllByCompanyId(id);
+    /**
+     * Return all company events
+     *
+     * @param id The company model
+     * @return Details of the company event
+     */
+    public List<CompanyDTO> getAllEventsByCompany(@NotNull String id){
+        return companyRepository
+                .findAllByCompanyId(id)
+                .stream()
+                .map(result -> modelMapper.map(result,CompanyDTO.class))
+                .collect(Collectors.toList());
     }
 
 }
