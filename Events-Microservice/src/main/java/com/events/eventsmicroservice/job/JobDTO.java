@@ -1,4 +1,4 @@
-package com.events.eventsmicroservice.company;
+package com.events.eventsmicroservice.job;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,10 +10,10 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CompanyDTO implements Serializable {
+public class JobDTO  implements Serializable {
 
     private String id;
-    private String companyId;
+    private String jobId;
     private String message;
     private LocalDateTime dateCreated;
 }

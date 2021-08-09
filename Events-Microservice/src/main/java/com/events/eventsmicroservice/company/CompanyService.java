@@ -37,6 +37,7 @@ public class CompanyService {
     /**
      * Update company Event
      *
+     * @param id company event ID
      * @param company The company model
      * @return Details of the company event
      */
@@ -80,5 +81,4 @@ public class CompanyService {
                 .map(result -> modelMapper.map(result,CompanyDTO.class))
                 .collect(Collectors.toList());
     }
-
 }
