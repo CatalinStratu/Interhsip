@@ -7,5 +7,5 @@ import java.util.List;
 
 @Repository
 public interface CandidateRepository extends MongoRepository<Candidate, String> {
-    List<CandidateDTO> findAllByCandidateId(String id);
+    List<Candidate> findAllByCandidateId(String id);
 }

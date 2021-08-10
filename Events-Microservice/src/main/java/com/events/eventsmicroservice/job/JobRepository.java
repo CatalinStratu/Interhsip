@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface JobRepository extends MongoRepository<Job, String> {
-    List<JobDTO> findAllByJobId(String id);
+    List<Job> findAllByJobId(String id);
 }

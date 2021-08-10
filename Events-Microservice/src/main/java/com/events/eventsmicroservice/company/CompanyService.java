@@ -1,5 +1,6 @@
 package com.events.eventsmicroservice.company;
 
+import com.events.eventsmicroservice.candidate.Candidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -44,15 +45,13 @@ public class CompanyService {
     public HttpStatus updateCompanyEvent(@NotNull String id, @NotNull Company company) {
         Optional<Company> companyData = companyRepository.findById(id);
 
-        if(companyData.isPresent()){
+        return companyData.map(result -> {
             Company toBeUpdate =  companyData.get();
             toBeUpdate.setCompanyId(company.getCompanyId());
             toBeUpdate.setMessage(company.getMessage());
             companyRepository.save(toBeUpdate);
             return HttpStatus.OK;
-        } else {
-            return HttpStatus.NOT_FOUND;
-        }
+        }).orElse(HttpStatus.NOT_FOUND);
     }
 
     /**

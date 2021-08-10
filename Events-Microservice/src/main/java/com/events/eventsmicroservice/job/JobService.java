@@ -1,6 +1,5 @@
 package com.events.eventsmicroservice.job;
 
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,15 +45,13 @@ public class JobService {
     public HttpStatus updateJobEvent(@NotNull String id, @NotNull Job job) {
         Optional<Job> jobData = jobRepository.findById(id);
 
-        if(jobData.isPresent()){
+        return jobData.map(result -> {
             Job toBeUpdate = jobData.get();
             toBeUpdate.setJobId(job.getJobId());
             toBeUpdate.setMessage(job.getMessage());
             jobRepository.save(toBeUpdate);
             return HttpStatus.OK;
-        } else {
-            return HttpStatus.NOT_FOUND;
-        }
+        }).orElse(HttpStatus.NOT_FOUND);
     }
 
     /**

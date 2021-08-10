@@ -7,5 +7,5 @@ import java.util.List;
 
 @Repository
 public interface CompanyRepository extends MongoRepository<Company, String> {
-    List<CompanyDTO> findAllByCompanyId(String id);
+    List<Company> findAllByCompanyId(String id);
 }
