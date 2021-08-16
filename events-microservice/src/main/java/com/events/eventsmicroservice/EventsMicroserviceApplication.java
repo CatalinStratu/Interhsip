@@ -1,5 +1,6 @@
 package com.events.eventsmicroservice;
 
+import com.github.cloudyrock.spring.v5.EnableMongock;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
@@ -7,6 +8,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 @EnableMongoRepositories
 @EnableMongoAuditing
+@EnableMongock
 @SpringBootApplication
 public class EventsMicroserviceApplication {
 

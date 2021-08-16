@@ -1,18 +1,25 @@
 package com.events.eventsmicroservice.candidate;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.LocalDateTime;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Document("candidates")
 public class Candidate {
     @Id
     private String id;
-
+    @Field("candidateId")
     private String candidateId;
-
+    @Field("message")
     private String message;
 
     @CreatedDate
@@ -22,25 +29,5 @@ public class Candidate {
         this.candidateId = candidateId;
         this.message = message;
         this.dateCreated = LocalDateTime.now();
-    }
-
-    public String getId(){
-        return id;
-    }
-
-    public String getCandidateId(){
-        return candidateId;
-    }
-
-    public String getMessage(){
-        return message;
-    }
-
-    public void setCandidateId(String id){
-        this.candidateId = id;
-    }
-
-    public void setMessage(String message){
-        this.message = message;
     }
 }

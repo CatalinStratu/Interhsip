@@ -58,11 +58,10 @@ public class CandidateService {
      * @param id The candidate model
      * @return Details of the candidate event
      */
-    public CandidateDTO getCandidateEvent(@NotNull String id) {
+    public Optional<CandidateDTO> getCandidateEvent(@NotNull String id) {
         return candidateRepository
                 .findById(id)
-                .map(result -> modelMapper.map(result, CandidateDTO.class))
-                .orElseThrow(EntityNotFoundException::new);
+                .map(result -> modelMapper.map(result, CandidateDTO.class));
     }
 
     /**

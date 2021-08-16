@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/candidates")
@@ -29,7 +30,7 @@ public class CandidateController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<CandidateDTO> getCandidateEvent(@PathVariable String id) {
+    public ResponseEntity<Optional<CandidateDTO>> getCandidateEvent(@PathVariable String id) {
         return ResponseEntity.ok(candidateService.getCandidateEvent(id));
     }
 

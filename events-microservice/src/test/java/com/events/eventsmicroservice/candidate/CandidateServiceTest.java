@@ -73,7 +73,7 @@ public class CandidateServiceTest {
         when(repository.findById(any())).thenReturn(candidateOk);
         when(mapper.map(candidateOk.get(), CandidateDTO.class)).thenReturn(dto);
 
-        CandidateDTO candidateDTO = service.getCandidateEvent(any(String.class));
+        Optional<CandidateDTO> candidateDTO = service.getCandidateEvent(any(String.class));
 
         assertThat(dto).isEqualTo(candidateDTO);
     }
