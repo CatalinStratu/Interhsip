@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/jobs")
@@ -28,7 +29,7 @@ public class JobController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<JobDTO> getJobEvent(@PathVariable String id) {
+    public ResponseEntity<Optional<JobDTO>> getJobEvent(@PathVariable String id) {
         return ResponseEntity.ok(jobService.getJobEvent(id));
     }
 

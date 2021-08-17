@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
-import javax.persistence.EntityNotFoundException;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -60,11 +59,10 @@ public class CompanyService {
      * @param id The company model
      * @return Details of the company event
      */
-    public CompanyDTO getCompanyEvent(@NotNull String id) {
+    public Optional<CompanyDTO> getCompanyEvent(@NotNull String id) {
         return companyRepository
                 .findById(id)
-                .map(result -> modelMapper.map(result,CompanyDTO.class))
-                .orElseThrow(EntityNotFoundException::new);
+                .map(result -> modelMapper.map(result,CompanyDTO.class));
     }
 
     /**

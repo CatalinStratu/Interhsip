@@ -1,19 +1,26 @@
 package com.events.eventsmicroservice.job;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.LocalDateTime;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Document("jobs")
 public class Job {
 
     @Id
     private String id;
-
+    @Field("jobId")
     private String jobId;
-
+    @Field("message")
     private String message;
 
     @CreatedDate
@@ -23,26 +30,6 @@ public class Job {
         this.jobId = jobId;
         this.message = message;
         this.dateCreated = LocalDateTime.now();
-    }
-
-    public String getId(){
-        return id;
-    }
-
-    public String getJobId(){
-        return jobId;
-    }
-
-    public String getMessage(){
-        return message;
-    }
-
-    public void setJobId(String id){
-        this.jobId = id;
-    }
-
-    public void setMessage(String message){
-        this.message = message;
     }
 
 }

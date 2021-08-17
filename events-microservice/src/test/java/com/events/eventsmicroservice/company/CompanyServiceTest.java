@@ -62,20 +62,6 @@ public class CompanyServiceTest {
         assertThat(companies.size()).isEqualTo(companyDTOS.size());
     }
 
-    @Test
-    @DisplayName("Get event by company ID")
-    public void testGetCompanyEvent_thenReturn_CandidateDTO(){
-
-        CompanyDTO dto = mock(CompanyDTO.class);
-        var companyOk = Optional.of(new Company("ID","TEST MESSAGE"));
-
-        when(repository.findById(any())).thenReturn(companyOk);
-        when(mapper.map(companyOk.get(), CompanyDTO.class)).thenReturn(dto);
-
-        CompanyDTO companyDTO = service.getCompanyEvent(any(String.class));
-
-        assertThat(dto).isEqualTo(companyDTO);
-    }
 
     @Test
     @DisplayName("Update company information when job exist")

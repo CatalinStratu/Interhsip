@@ -66,21 +66,6 @@ public class JobServiceTest {
     }
 
     @Test
-    @DisplayName("Get event by job ID")
-    public void testGetJobEvent_thenReturn_JobDTO(){
-
-        JobDTO dto = mock(JobDTO.class);
-        var jobOk = Optional.of(new Job("ID","TEST MESSAGE"));
-
-        when(repository.findById(any())).thenReturn(jobOk);
-        when(mapper.map(jobOk.get(), JobDTO.class)).thenReturn(dto);
-
-        JobDTO jobDTO = service.getJobEvent(any(String.class));
-
-        assertThat(dto).isEqualTo(jobDTO);
-    }
-
-    @Test
     @DisplayName("Update job information when job exist")
     public void testUpdateWhenJobExists_thenReturn_OK() {
         // Given

@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/companies")
@@ -29,7 +30,7 @@ public class CompanyController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<CompanyDTO> getCompanyEvent(@PathVariable String id) {
+    public ResponseEntity<Optional<CompanyDTO>> getCompanyEvent(@PathVariable String id) {
         return ResponseEntity.ok(companyService.getCompanyEvent(id));
     }
 

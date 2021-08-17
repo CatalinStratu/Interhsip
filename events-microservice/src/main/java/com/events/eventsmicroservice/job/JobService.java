@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
@@ -60,11 +59,10 @@ public class JobService {
      * @param id The job model
      * @return Details of the job event
      */
-    public JobDTO getJobEvent(@NotNull String id) {
+    public Optional<JobDTO> getJobEvent(@NotNull String id) {
         return jobRepository
                 .findById(id)
-                .map(result -> modelMapper.map(result,JobDTO.class))
-                .orElseThrow(EntityNotFoundException::new);
+                .map(result -> modelMapper.map(result,JobDTO.class));
     }
 
     /**
