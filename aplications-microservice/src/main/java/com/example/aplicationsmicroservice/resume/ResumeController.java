@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.*;
-
 @RestController
 public class ResumeController {
 
@@ -23,8 +21,17 @@ public class ResumeController {
     }
 
     @RequestMapping(value = "/apply", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<HttpStatus> fileUpload(@RequestParam("file") MultipartFile file) throws IOException {
-        return ResponseEntity.ok(resumeService.uploadResume(file));
+    public ResponseEntity<HttpStatus> fileUpload(@RequestParam("file") MultipartFile file){
+
+        HttpStatus responseStatus;
+        try {
+            responseStatus = resumeService.uploadResume(file);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            responseStatus = HttpStatus.BAD_REQUEST;
+        }
+
+        return ResponseEntity.ok(responseStatus);
     }
 
 }
