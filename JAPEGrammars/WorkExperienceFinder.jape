@@ -3,7 +3,7 @@ import static gate.Utils.*;
 }
 Phase: WorkExperienceFinder 
 Input: Lookup Token Date SectionFinder
-Options: control = appelt debug = true
+Options: control = appelt debug = false
 
     MACRO: TOKEN_FILLER
 (({Token})[0,7])

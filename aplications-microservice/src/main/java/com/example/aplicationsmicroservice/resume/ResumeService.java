@@ -67,7 +67,6 @@ public class ResumeService {
             path = Files.write(path, bytes);
         } catch (IOException exception) {
             throw new RuntimeException(exception.getMessage());
-
         }
 
         try {
@@ -86,7 +85,6 @@ public class ResumeService {
             responseWrapper = new ResponseWrapper();
             responseWrapper.setStatus(200);
             responseWrapper.setData(parsedJSON);
-            responseWrapper.setMessage("Successfully parsed Resume!");
         }
 
         if (this.send(responseWrapper).equals(HttpStatus.OK))

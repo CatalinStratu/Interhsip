@@ -1,6 +1,6 @@
 Phase: NameFinder
 Input: Sentence Person
-Options: control = once debug = true
+Options: control = once debug = false
 Rule: NameRule
 (
 (({Sentence})[10])
