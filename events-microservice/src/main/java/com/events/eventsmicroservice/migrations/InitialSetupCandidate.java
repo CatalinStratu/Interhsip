@@ -9,9 +9,9 @@ import com.github.cloudyrock.mongock.driver.mongodb.springdata.v3.decorator.impl
 public class InitialSetupCandidate {
     @ChangeSet(order = "01", author = "events", id = "01-addCandidates")
     public void addCandidates(MongockTemplate mongockTemplate) {
-        for (int i = 0; i<10;i++){
+        for (int i = 0; i < 10; i++) {
             Candidate candidate = new Candidate();
-            candidate.setCandidateId(""+i);
+            candidate.setCandidateId("" + i);
             candidate.setMessage("Candidate apply successfully");
             mongockTemplate.save(candidate);
         }
