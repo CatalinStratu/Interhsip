@@ -1,9 +1,14 @@
 package com.listener.listener.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id", scope = Resume.class)
 public class Resume {
     private Integer status;
-    private Object data;
-    private String summary;
+    private Data data;
+    private String message;
 
     public Integer getStatus() {
         return status;
@@ -17,15 +22,15 @@ public class Resume {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(Data data) {
         this.data = data;
     }
 
-    public String getSummary() {
-        return summary;
+    public String getMessage() {
+        return message;
     }
 
-    public void setSummary(String summary) {
-        this.summary = summary;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

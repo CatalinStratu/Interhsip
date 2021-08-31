@@ -1,11 +1,7 @@
 package com.listener.listener.configurations;
 
 
-import com.listener.listener.service.RabbitMQListner;
 import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.listener.MessageListenerContainer;
-import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,16 +22,4 @@ public class RabbitMQConfig {
     Queue queue() {
         return new Queue(queueName, false);
     }
-
-    //create MessageListenerContainer using default connection factory
-    @Bean
-    MessageListenerContainer messageListenerContainer(ConnectionFactory connectionFactory ) {
-        SimpleMessageListenerContainer simpleMessageListenerContainer = new SimpleMessageListenerContainer();
-        simpleMessageListenerContainer.setConnectionFactory(connectionFactory);
-        simpleMessageListenerContainer.setQueues(queue());
-        simpleMessageListenerContainer.setMessageListener(new RabbitMQListner());
-        return simpleMessageListenerContainer;
-
-    }
-
 }
